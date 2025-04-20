@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Input } from '@shared/ui/input';
+import { Input } from '@shared/ui/Input';
 import { Button } from '@shared/ui/Button';
 
 interface SignupFormValues {

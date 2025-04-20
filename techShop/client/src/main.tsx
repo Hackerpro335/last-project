@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { App } from '@app/App'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import RegistrationPage from '@pages/registration/ui/RegistrationPage'
+import RegistrationPage from '@pages/registration/ui/Registration'
 import { LoginPage } from '@pages/login/ui/LoginPage'
 
 createRoot(document.getElementById('root')!).render(
