@@ -1,4 +1,4 @@
-import { Review } from '../model/Review';
+import { Review } from "../models/Reviews";
 
 export const reviewService = {
   async getAll() {

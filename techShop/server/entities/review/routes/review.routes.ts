@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { reviewController } from '../controller/review.controller';
 import { asyncHandler } from '../../../shared/lib/asyncHandler';
+import { reviewController } from '../controller/review.controller';
 
 const reviewRoutes = Router();
 
