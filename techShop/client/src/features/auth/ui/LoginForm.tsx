@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@shared/ui/Input';
-import { Button } from '@shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -75,9 +74,9 @@ export const LoginForm = () => {
         {errors.password && <p>{errors.password.message}</p>}
       </div>
 
-      <Button type="submit" disabled={loading}>
+      <button type="submit" disabled={loading}>
         {loading ? 'Logging in...' : 'Login'}
-      </Button>
+      </button>
     </form>
   );
 };
