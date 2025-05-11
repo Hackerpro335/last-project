@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-//import { registrationService } from '../service/registration.service';
+import { registrationService } from '../service/registration.service';
+
 
 export const registrationController = {
   register: async (req: Request, res: Response) => {
