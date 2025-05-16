@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '../store/UserSlice';
+import userReducer from './userSlice';
+import themeSlice from './themeSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    theme: themeSlice//подключаем слайс темы(для переключения фона)
   },
 });
 

@@ -1,24 +1,26 @@
 import { useForm } from 'react-hook-form';
 import { Input } from '@shared/ui/Input';
-import { Button } from '@shared/ui/Button';
 
-interface SignupFormValues {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+interface ProductFormValues {
+  id: number,
+  name: string,
+  image: string,
+  description: string,
+  quantity: number,
+  price: string,
+  discount_price: string
 }
 
-export const RegistrationForm = () => {
+export const ProductForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupFormValues>();
+  } = useForm<ProductFormValues>();
 
-  const onSubmit = async (data: SignupFormValues) => {
+  const onSubmit = async (data: ProductFormValues) => {
     try {
-      const res = await fetch('/api/registration', {
+      const res = await fetch('/api/product', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,57 +38,82 @@ export const RegistrationForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="CLASS__NAME">
       <div>
-        <label className="CLASS__NAME">Username</label>
+        <label className="CLASS__NAME">Name</label>
         <Input
-          {...register('username', { required: 'Username is required' })}
+          {...register('name', { required: 'Name is required' })}
           className="CLASS__NAME"
         />
-        {errors.username && (
-          <p className="CLASS__NAME">{errors.username.message}</p>
-        )}
-      </div>
-      <div>
-        <label className="CLASS__NAME">Email</label>
-        <Input
-          type="email"
-          {...register('email', { required: 'Email is required' })}
-          className="CLASS__NAME"
-        />
-        {errors.email && (
-          <p className="CLASS__NAME">{errors.email.message}</p>
+        {errors.name && (
+          <p className="CLASS__NAME">{errors.name.message}</p>
         )}
       </div>
 
       <div>
-        <label className="CLASS__NAME">Password</label>
+        <label className="CLASS__NAME">Image</label>
         <Input
-          type="password"
-          {...register('password', { required: 'Password is required' })}
+          type="image"
+          {...register('image', { required: 'image is required' })}
           className="CLASS__NAME"
         />
-        {errors.password && (
-          <p className="CLASS__NAME">{errors.password.message}</p>
+        {errors.image && (
+          <p className="CLASS__NAME">{errors.image.message}</p>
+        )}
+      </div>
+      
+      <div>
+        <label className="CLASS__NAME">Description</label>
+        <Input
+          type="description"
+          {...register('description', { required: 'description is required' })}
+          className="CLASS__NAME"
+        />
+        {errors.description && (
+          <p className="CLASS__NAME">{errors.description.message}</p>
         )}
       </div>
 
       <div>
-        <label className="CLASS__NAME">Confirm Password</label>
+        <label className="CLASS__NAME">Quantity</label>
         <Input
-          type="password"
-          {...register('confirmPassword', { required: 'Confirm Password is required' })}
+          type="quantity"
+          {...register('quantity', { required: 'quantity is required' })}
           className="CLASS__NAME"
         />
-        {errors.confirmPassword && (
-          <p className="CLASS__NAME">{errors.confirmPassword.message}</p>
+        {errors.quantity && (
+          <p className="CLASS__NAME">{errors.quantity.message}</p>
         )}
       </div>
 
-      <Button
+      <div>
+        <label className="CLASS__NAME">Price</label>
+        <Input
+          type="price"
+          {...register('price', { required: 'price is required' })}
+          className="CLASS__NAME"
+        />
+        {errors.price && (
+          <p className="CLASS__NAME">{errors.price.message}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="CLASS__NAME">Discount price</label>
+        <Input
+          type="discount_price"
+          {...register('discount_price', { required: 'discount price is required' })}
+          className="CLASS__NAME"
+        />
+        {errors.discount_price && (
+          <p className="CLASS__NAME">{errors.discount_price.message}</p>
+        )}
+      </div>
+
+      <button
         type="submit"
         className="CLASS__NAME"
       >
-        Register
-      </Button>
+        Create
+      </button>
     </form>
   );
 };

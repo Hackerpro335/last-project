@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { Input } from '@shared/ui/Input';
-// import { Button } from '@shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -97,9 +96,9 @@ export const RegistrationForm = () => {
         {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
       </div>
 
-      <Button type="submit" className="CLASS__NAME" disabled={loading}>
+      <button type="submit" className="CLASS__NAME" disabled={loading}>
         {loading ? 'Registering...' : 'Register'}
-      </Button>
+      </button>
     </form>
   );
 };
