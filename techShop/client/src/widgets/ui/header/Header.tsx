@@ -7,7 +7,7 @@ export const Header = () => {
       <div className="CLASS__NAME">
         
         <Link to="/" className="CLASS__NAME">
-          MyApp
+          TechShop
         </Link>
 
         <nav className="CLASS__NAME">
@@ -17,8 +17,8 @@ export const Header = () => {
           <Link to="/registration" className="CLASS__NAME">
             Register
           </Link>
-          <Link to="/stories" className="CLASS__NAME">
-            Stories
+          <Link to="/products" className="CLASS__NAME">
+            Products
           </Link>
         </nav>
 
