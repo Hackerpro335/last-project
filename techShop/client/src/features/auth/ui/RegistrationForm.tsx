@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@shared/ui/Input';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import './RegistrationForm.css';
 
 interface SignupFormValues {
   username: string;
@@ -56,48 +57,49 @@ export const RegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="CLASS__NAME">
-      <div>
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
+
+      <div className='input-span'>
         <label>Username</label>
         <Input
           {...register('username', { required: 'Username is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.username && <p>{errors.username.message}</p>}
       </div>
 
-      <div>
+      <div className='input-span'>
         <label>Email</label>
         <Input
           type="email"
           {...register('email', { required: 'Email is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.email && <p>{errors.email.message}</p>}
       </div>
 
-      <div>
+      <div className='input-span'>
         <label>Password</label>
         <Input
           type="password"
           {...register('password', { required: 'Password is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.password && <p>{errors.password.message}</p>}
       </div>
 
-      <div>
+      <div className='input-span'>
         <label>Confirm Password</label>
         <Input
           type="password"
           {...register('confirmPassword', { required: 'Confirm Password is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
       </div>
 
-      <button type="submit" className="CLASS__NAME" disabled={loading}>
-        {loading ? 'Registering...' : 'Register'}
+      <button type="submit" className="submit" disabled={loading}>
+        {loading ? 'Registering...' : 'Sign up'}
       </button>
     </form>
   );

@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { Input } from '@shared/ui/Input';
+import './ProductForm.css';
 
 interface ProductFormValues {
   id: number,
@@ -36,15 +37,15 @@ export const ProductForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="CLASS__NAME">
-      <div>
-        <label className="CLASS__NAME">Name</label>
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <div className='input-span'>
+        <label className="input-span">Name</label>
         <Input
           {...register('name', { required: 'Name is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.name && (
-          <p className="CLASS__NAME">{errors.name.message}</p>
+          <p className="input-span">{errors.name.message}</p>
         )}
       </div>
 
@@ -60,57 +61,57 @@ export const ProductForm = () => {
         )}
       </div>
       
-      <div>
-        <label className="CLASS__NAME">Description</label>
+      <div className='input-span'>
+        <label className="input-span">Description</label>
         <Input
           type="description"
           {...register('description', { required: 'description is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.description && (
-          <p className="CLASS__NAME">{errors.description.message}</p>
+          <p className="input-span">{errors.description.message}</p>
         )}
       </div>
 
-      <div>
-        <label className="CLASS__NAME">Quantity</label>
+      <div className='input-span'>
+        <label className="input-span">Quantity</label>
         <Input
           type="quantity"
           {...register('quantity', { required: 'quantity is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.quantity && (
-          <p className="CLASS__NAME">{errors.quantity.message}</p>
+          <p className="input-span">{errors.quantity.message}</p>
         )}
       </div>
 
-      <div>
-        <label className="CLASS__NAME">Price</label>
+      <div className='input-span'>
+        <label className="input-span">Price</label>
         <Input
           type="price"
           {...register('price', { required: 'price is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.price && (
-          <p className="CLASS__NAME">{errors.price.message}</p>
+          <p className="input-span">{errors.price.message}</p>
         )}
       </div>
 
-      <div>
-        <label className="CLASS__NAME">Discount price</label>
+      <div className='input-span'>
+        <label className="input-span">Discount price</label>
         <Input
           type="discount_price"
           {...register('discount_price', { required: 'discount price is required' })}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.discount_price && (
-          <p className="CLASS__NAME">{errors.discount_price.message}</p>
+          <p className="input-span">{errors.discount_price.message}</p>
         )}
       </div>
 
       <button
         type="submit"
-        className="CLASS__NAME"
+        className="submit"
       >
         Create
       </button>

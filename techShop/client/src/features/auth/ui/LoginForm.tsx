@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@shared/ui/Input';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import './LoginForm.css';
 
 //схема валидации
 const loginSchema = z.object({
@@ -53,29 +54,29 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="CLASS__NAME">
-      <div>
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <div className='input-span'>
         <label>Email</label>
         <Input
           type="email"
           {...register('email')}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.email && <p>{errors.email.message}</p>}
       </div>
 
-      <div>
+      <div className='input-span'>
         <label>Password</label>
         <Input
           type="password"
           {...register('password')}
-          className="CLASS__NAME"
+          className="input-span"
         />
         {errors.password && <p>{errors.password.message}</p>}
       </div>
 
-      <button type="submit" disabled={loading}>
-        {loading ? 'Logging in...' : 'Login'}
+      <button className='submit' type="submit" disabled={loading}>
+        {loading ? 'Logging in...' : 'Log in'}
       </button>
     </form>
   );
