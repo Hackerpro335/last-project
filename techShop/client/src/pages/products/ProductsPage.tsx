@@ -1,10 +1,15 @@
-import { ProductForm } from "@features/auth/ui/ProductForm"
+import { ProductForm } from "@features/auth/ui/ProductForm";
+import './productPage.css';
+import { ProductList } from "@features/auth/ui/ProductList";
 
 export const ProductsPage = () => {
-    return (
-        <div>
-            <h1>Products page:</h1>
-            <ProductForm />
-        </div>
-    )
-}
+  return (
+    <div className="products-page">
+      <h1 className="products-page__title">Products page</h1>
+      <div className="product-form">
+        <ProductForm />
+      </div>
+      <ProductList />
+    </div>
+  );
+};

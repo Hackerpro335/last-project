@@ -1,0 +1,30 @@
+.product-detail {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .product-detail img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .product-detail__add,
+  .product-detail__back {
+    margin: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    background-color: #465d72;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  .product-detail__add:hover,
+  .product-detail__back:hover {
+    background-color: #33495a;
+  }
