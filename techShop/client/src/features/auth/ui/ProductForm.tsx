@@ -1,15 +1,19 @@
 import { useForm } from 'react-hook-form';
 import { Input } from '@shared/ui/Input';
+import { Button } from '@shared/ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '@shared/store/productsSlice';
 import './ProductForm.css';
 
 interface ProductFormValues {
-  id: number,
-  name: string,
-  image: string,
-  description: string,
-  quantity: number,
-  price: string,
-  discount_price: string
+  name: string;
+  description: string;
+  price: number;
+  discountPrice?: number;
+  quantity: number;
+  image: string[];
 }
 
 export const ProductForm = () => {
@@ -19,102 +23,114 @@ export const ProductForm = () => {
     formState: { errors },
   } = useForm<ProductFormValues>();
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (data: ProductFormValues) => {
     try {
-      const res = await fetch('/api/product', {
+      setLoading(true);
+
+      const productData = {
+        ...data,
+        discount_price: data.discountPrice || null,
+      };
+
+      const res = await fetch('/api/products', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productData),
       });
 
       const resData = await res.json();
+
+      if (!res.ok) {
+        alert(resData.message || 'Failed to add product');
+        return;
+      }
+
       alert(resData.message);
+      dispatch(addProduct(resData.product));
+      navigate('/products');
     } catch (err) {
-      console.error('Registration failed', err);
+      console.error('Failed to add product', err);
+      alert('Something went wrong!');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form">
-      <div className='input-span'>
-        <label className="input-span">Name</label>
-        <Input
-          {...register('name', { required: 'Name is required' })}
-          className="input-span"
-        />
-        {errors.name && (
-          <p className="input-span">{errors.name.message}</p>
-        )}
+    <form onSubmit={handleSubmit(onSubmit)} className="product-form">
+      <h2 className="product-form__title">Add New Product</h2>
+
+      <div className="product-form__field">
+        <label className="product-form__label">Product Name</label>
+        <Input {...register('name', { required: 'Product name is required' })} className="product-form__input" />
+        {errors.name && <p className="product-form__error">{errors.name.message}</p>}
       </div>
 
-      <div>
-        <label className="CLASS__NAME">Image</label>
-        <Input
-          type="image"
-          {...register('image', { required: 'image is required' })}
-          className="CLASS__NAME"
-        />
-        {errors.image && (
-          <p className="CLASS__NAME">{errors.image.message}</p>
-        )}
-      </div>
-      
-      <div className='input-span'>
-        <label className="input-span">Description</label>
-        <Input
-          type="description"
-          {...register('description', { required: 'description is required' })}
-          className="input-span"
-        />
-        {errors.description && (
-          <p className="input-span">{errors.description.message}</p>
-        )}
+      <div className="product-form__field">
+        <label className="product-form__label">Description</label>
+        <Input {...register('description', { required: 'Description is required' })} className="product-form__input" />
+        {errors.description && <p className="product-form__error">{errors.description.message}</p>}
       </div>
 
-      <div className='input-span'>
-        <label className="input-span">Quantity</label>
+      <div className="product-form__field">
+        <label className="product-form__label">Price</label>
         <Input
-          type="quantity"
-          {...register('quantity', { required: 'quantity is required' })}
-          className="input-span"
+          type="number"
+          step="0.01"
+          {...register('price', {
+            required: 'Price is required',
+            min: { value: 0.01, message: 'Price must be greater than 0' },
+          })}
+          className="product-form__input"
         />
-        {errors.quantity && (
-          <p className="input-span">{errors.quantity.message}</p>
-        )}
+        {errors.price && <p className="product-form__error">{errors.price.message}</p>}
       </div>
 
-      <div className='input-span'>
-        <label className="input-span">Price</label>
+      <div className="product-form__field">
+        <label className="product-form__label">Discount Price (optional)</label>
         <Input
-          type="price"
-          {...register('price', { required: 'price is required' })}
-          className="input-span"
+          type="number"
+          step="0.01"
+          {...register('discountPrice', {
+            min: { value: 0.01, message: 'Discount price must be greater than 0' },
+          })}
+          className="product-form__input"
         />
-        {errors.price && (
-          <p className="input-span">{errors.price.message}</p>
-        )}
+        {errors.discountPrice && <p className="product-form__error">{errors.discountPrice.message}</p>}
       </div>
 
-      <div className='input-span'>
-        <label className="input-span">Discount price</label>
+      <div className="product-form__field">
+        <label className="product-form__label">Quantity</label>
         <Input
-          type="discount_price"
-          {...register('discount_price', { required: 'discount price is required' })}
-          className="input-span"
+          type="number"
+          {...register('quantity', {
+            required: 'Quantity is required',
+            min: { value: 0, message: 'Quantity cannot be negative' },
+          })}
+          className="product-form__input"
         />
-        {errors.discount_price && (
-          <p className="input-span">{errors.discount_price.message}</p>
-        )}
+        {errors.quantity && <p className="product-form__error">{errors.quantity.message}</p>}
       </div>
 
-      <button
-        type="submit"
-        className="submit"
-      >
-        Create
-      </button>
+
+      <div className="product-form__field">
+        <label className="product-form__label">Images (URLs, comma-separated)</label>
+        <Input
+          {...register('image', {
+            required: 'Image is required',
+          })}
+          className="product-form__input"
+        />
+        {errors.image && <p className="product-form__error">{errors.image.message}</p>}
+      </div>
+
+      <Button type="submit" className="product-form__submit" disabled={loading}>
+        {loading ? 'Saving...' : 'Save Product'}
+      </Button>
     </form>
   );
 };
