@@ -42,7 +42,7 @@ export const LoginForm = () => {
         return;
       }
 
-      // Храни токен при необходимости (resData.token)
+      // Хранит токен при необходимости (resData.token)
       alert(resData.message);
       navigate('/');
     } catch (err) {
@@ -55,6 +55,7 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
       <div className='input-span'>
         <label>Email</label>
         <Input

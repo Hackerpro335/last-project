@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { Input } from '@shared/ui/Input';
-import { Button } from '@shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -62,6 +61,7 @@ export const ProductForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="product-form">
+      <h1 className="products-page__title">Products page</h1>
       <h2 className="product-form__title">Add New Product</h2>
 
       <div className="product-form__field">
@@ -128,9 +128,9 @@ export const ProductForm = () => {
         {errors.image && <p className="product-form__error">{errors.image.message}</p>}
       </div>
 
-      <Button type="submit" className="product-form__submit" disabled={loading}>
+      <button type="submit" className="product-form__submit" disabled={loading}>
         {loading ? 'Saving...' : 'Save Product'}
-      </Button>
+      </button>
     </form>
   );
 };

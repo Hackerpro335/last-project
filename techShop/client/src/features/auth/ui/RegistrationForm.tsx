@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './RegistrationForm.css';
 
 interface SignupFormValues {
-  username: string;
+  Username: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -58,14 +58,15 @@ export const RegistrationForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
-
+      <h1 className="text-2xl font-bold mb-4 text-center">Registration</h1>
       <div className='input-span'>
         <label>Username</label>
         <Input
-          {...register('username', { required: 'Username is required' })}
+        type = "Username"
+          {...register('Username', { required: 'Username is required' })}
           className="input-span"
         />
-        {errors.username && <p>{errors.username.message}</p>}
+        {errors.Username && <p>{errors.Username.message}</p>}
       </div>
 
       <div className='input-span'>

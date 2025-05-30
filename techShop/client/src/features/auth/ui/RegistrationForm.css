@@ -18,6 +18,7 @@ form {
     gap: 0.5rem;
   }
   
+  .form input[type="Username"],
   .form input[type="email"],
   .form input[type="password"] {
     border-radius: 0.5rem;
@@ -31,6 +32,7 @@ form {
     outline: 2px solid var(--bg-dark);
   }
   
+  .form input[type="Username"]:focus,
   .form input[type="email"]:focus,
   .form input[type="password"]:focus {
     outline: 2px solid var(--clr);
