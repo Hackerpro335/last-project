@@ -1,0 +1,16 @@
+.products-page {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+  .product-form {
+    margin-bottom: 20px;
+}
+  
+  .product-list {
+    margin-top: 20px;
+}
